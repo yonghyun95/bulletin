@@ -22,14 +22,19 @@ public class BulletinController {
         return new ModelAndView("index");
     }
 
-    @PostMapping("/api/bulletin")
+    @PostMapping("/api/bulletin")   // Post 등록!!!!!!!
     public Bulletin createBulletin(@RequestBody BulletinRequstDto bulletinRequstDto){
         return bulletinService.createBulletin(bulletinRequstDto);
     }
 
     @GetMapping("api/bulletin")
-    public List<Bulletin> getMemos() {
+    public List<Bulletin> getBulletin() {
         return bulletinService.getBulletin();
+    }
+
+    @GetMapping("api/bulletin/{id}")
+    public Bulletin getBulletin(@PathVariable Long id) {
+        return bulletinService.getBulletinId(id);
     }
     @PutMapping("/api/bulletin/{id}")
     public Long updateBulletin(@PathVariable Long id, @RequestBody BulletinRequstDto bulletinRequstDto){

@@ -14,7 +14,7 @@ import java.util.List;
 public class BulletinService {
     private final BulletinRepository bulletinRepository;
 
-    // BulletinR저장
+    // BulletinR저장하기
     @Transactional
     public Bulletin createBulletin(BulletinRequstDto bulletinRequstDto) {
         Bulletin bulletin = new Bulletin(bulletinRequstDto);
@@ -36,5 +36,13 @@ public class BulletinService {
     public Long deleteBulletin(Long id) {
     bulletinRepository.deleteById(id);
         return id;
+    }
+
+    @Transactional
+    public Bulletin getBulletinId(Long id) {
+        Bulletin bulletin =  bulletinRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않습니다.")
+        );
+        return bulletin;
     }
 }
